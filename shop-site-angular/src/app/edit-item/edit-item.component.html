@@ -1,0 +1,79 @@
+<div class="container">
+
+  <div class="mx-auto mt-5">
+    <div class="card mx-auto mt-5 custom-card">
+      <div class="card-body">
+
+        <form class="form-inline">
+          <label for="inputItemId" class="mr-4">Item ID</label>
+          <input type="text" class="form-control mr-4" id="inputItemId" [(ngModel)]="itemId" name="inputItemId" maxlength="12">
+          <button class="btn btn-dark" (click)="findItemById()">SEARCH</button>
+        </form>
+
+        <div class="mt-4 col text-center" *ngIf="showNotFoundMessage">
+          <span class="alert alert-danger" role="alert">Item not found</span>
+        </div>
+
+        <div class="mt-4 col text-center" *ngIf="success">
+          <span class="alert alert-success" role="alert">Item updated</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!--show if find stock-->
+  <div class="card mx-auto mt-5 custom-card" *ngIf="showEditForm">
+    <div class="card-body">
+      <form>
+        <div class="form-group row">
+          <label for="inputCode" class="col-sm-3 col-form-label">Code</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="inputCode" [(ngModel)]="itemToUpdate.code" name="inputCode" maxlength="12" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputName" class="col-sm-3 col-form-label">name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="inputName" [(ngModel)]="itemToUpdate.name" name="inputName" maxlength="20" required>
+          </div>
+        </div>   
+        <div class="form-group row">
+          <label for="inputAmount" class="col-sm-3 col-form-label">amount</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="inputAmount" [(ngModel)]="itemToUpdate.amount" name="inputAmount" required>
+          </div>
+        </div>     
+        <div class="form-group row">
+          <label for="inputInventoryCode" class="col-sm-3 col-form-label">Inventory code</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="inputInventoryCode" [(ngModel)]="itemToUpdate.inventoryCode" name="inputInventoryCode" required>
+          </div>
+        </div>     
+        <div class="form-group row">
+          <label for="inputInventoryCode" class="col-sm-3 col-form-label">Stock</label>
+          <div class="dropdown col-sm-9">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span *ngIf="stockCode">{{stockCode}}</span>
+              <span *ngIf="!stockCode">Select Stock</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" (click)="stockId = stock.id; stockCode = stock.code" *ngFor="let stock of stocks">
+                {{stock.code}}
+              </a>
+            </div>
+          </div>
+        </div>    
+      </form>
+      
+      <div class="col text-center">
+        <button class="btn btn-dark" (click)="updateItem()">SUBMIT</button>
+      </div>
+
+      <div class="mt-4 col text-center" *ngIf="fail">
+        <span class="alert alert-danger" role="alert">sorry, an unexpected error occurred, please try again</span>
+      </div>
+
+    </div>
+  </div>
+</div>

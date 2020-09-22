@@ -1,0 +1,18 @@
+<table class="table mt-5 mx-auto table-borderless table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Stock ID</th>
+      <th scope="col">Stock code</th>
+      <th scope="col">Units sold</th>
+      <th scope="col">units available</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stock of stocks">
+      <td>{{stock.id}}</td>
+      <td>{{stock.code}}</td>
+      <td>{{stock.unitsSold}}</td>
+      <td>{{stock.unitsAvailable}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,59 @@
+<div class="container">
+
+  <div class="mx-auto mt-5">
+    <div class="card mx-auto mt-5 custom-card">
+      <div class="card-body">
+
+        <form class="form-inline">
+          <label for="inputCode" class="mr-4">Stock ID</label>
+          <input type="text" class="form-control mr-4" id="inputCode" [(ngModel)]="code" name="inputCode" maxlength="12">
+          <button class="btn btn-dark" (click)="findStock()">SEARCH</button>
+        </form>
+
+        <div class="mt-4 col text-center" *ngIf="showNotFoundMessage">
+          <span class="alert alert-danger" role="alert">Stock not found</span>
+        </div>
+
+        <div class="mt-4 col text-center" *ngIf="success">
+          <span class="alert alert-success" role="alert">Stock updated</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!--show if find stock-->
+  <div class="card mx-auto mt-5 custom-card" *ngIf="showEditForm">
+    <div class="card-body">
+      <form >
+        <div class="form-group row">
+          <label for="inputCode" class="col-sm-3 col-form-label">Code</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="inputCode" [(ngModel)]="stockToEdit.code" name="inputCode" maxlength="12">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputUnitsSold" class="col-sm-3 col-form-label">Units sold</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="inputUnitsSold" [(ngModel)]="stockToEdit.unitsSold" name="inputUnitsSold">
+          </div>
+        </div>   
+        <div class="form-group row">
+          <label for="inputUnitsAvailable" class="col-sm-3 col-form-label">Units available</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="inputUnitsAvailable" [(ngModel)]="stockToEdit.unitsAvailable" name="inputUnitsAvailable">
+          </div>
+        </div>     
+      </form>
+      
+      <div class="col text-center">
+        <button class="btn btn-dark" (click)="updateStock()">SUBMIT</button>
+      </div>
+
+      <div class="mt-4 col text-center" *ngIf="fail">
+        <span class="alert alert-danger" role="alert">sorry, an unexpected error occurred, please try again</span>
+      </div>
+
+    </div>
+  </div>
+</div>
